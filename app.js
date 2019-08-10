@@ -2,8 +2,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 
-const adminData = require('./routes/admin');
+// Custom Middleware
+const adminRoutes = require('./routes/admin');
 const shopRouters = require('./routes/shop');
+const errorController = require('./controller/error');
 
 const app = express();
 
@@ -19,14 +21,9 @@ app.get('/favicon.ico', (req, res) => res.status(204));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/admin', adminData.routes);
+app.use('/admin', adminRoutes);
 app.use(shopRouters);
 
-app.use((req, res, next) => {
-  res.status(404).render('404', {
-    pageTitle: '404 :(',
-    path: ''
-  });
-});
+app.use(errorController.get404);
 
 app.listen(3000, console.log('Listening on PORT: 3000'));
