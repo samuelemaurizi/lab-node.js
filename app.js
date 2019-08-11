@@ -5,7 +5,7 @@ const path = require('path');
 // Custom Middleware
 const adminRoutes = require('./routes/admin');
 const shopRouters = require('./routes/shop');
-const errorController = require('./controller/error');
+const errorController = require('./controllers/error');
 
 const app = express();
 

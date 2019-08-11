@@ -2,12 +2,15 @@ const express = require('express');
 const path = require('path');
 
 // Custom middleware
-const productController = require('../controller/products');
+const adminController = require('../controllers/admin');
 
 const router = express.Router();
 
-router.get('/add-product', productController.getAddProduct);
+// GET
+router.get('/add-product', adminController.getAddProduct);
+router.get('/products', adminController.getProducts);
 
-router.post('/add-product', productController.postAddProduct);
+// POST
+router.post('/add-product', adminController.postAddProduct);
 
 module.exports = router;

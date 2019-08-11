@@ -32,12 +32,18 @@ main {
   margin: auto;
 }
 
+form {
+  display: inline;
+}
+
 .main-header {
   width: 100%;
   height: 3.5rem;
   background-color: var(--nav-bg-color);
   padding: 0 1.5rem;
   margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
 }
 
 .main-header__nav {
@@ -67,6 +73,80 @@ main {
 .main-header__item a:active,
 .main-header__item a.active {
   color: var(--main-font-color);
+}
+
+.mobile-nav {
+  width: 30rem;
+  height: 100vh;
+  max-width: 90%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: white;
+  z-index: 10;
+  padding: 2rem 1rem 1rem 2rem;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-out;
+}
+
+.mobile-nav.open {
+  transform: translateX(0);
+}
+
+.mobile-nav__item-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+.mobile-nav__item {
+  margin: 1rem;
+  padding: 0;
+}
+
+.mobile-nav__item a {
+  text-decoration: none;
+  color: black;
+  font-size: 1.5rem;
+  padding: 0.5rem 2rem;
+}
+
+.mobile-nav__item a:active,
+.mobile-nav__item a:hover,
+.mobile-nav__item a.active {
+  background: #00695c;
+  color: white;
+  border-radius: 3px;
+}
+
+.mobile-nav__item-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+.mobile-nav__item {
+  margin: 1rem;
+  padding: 0;
+}
+
+.mobile-nav__item a {
+  text-decoration: none;
+  color: black;
+  font-size: 1.5rem;
+  padding: 0.5rem 2rem;
+}
+
+.mobile-nav__item a:active,
+.mobile-nav__item a:hover,
+.mobile-nav__item a.active {
+  background: #00695c;
+  color: white;
+  border-radius: 3px;
 }
 
 .grid {
@@ -111,17 +191,29 @@ main {
 }
 
 .btn {
+  display: inline-block;
+  padding: 0.25rem 1rem;
+  text-decoration: none;
   font: inherit;
   border: 1px solid var(--nav-bg-color);
   border-radius: 3px;
   color: #333;
   background: var(--nav-color);
   cursor: pointer;
-  padding: 0.25rem 0.5rem;
 }
 
 .btn:hover,
 .btn:active {
   background: var(--nav-bg-color);
   color: var(--nav-color);
+}
+
+@media (min-width: 768px) {
+  .main-header__nav {
+    display: flex;
+  }
+
+  #side-menu-toggle {
+    display: none;
+  }
 }
