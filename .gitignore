@@ -1,7 +1,7 @@
 node_modules/
 message.txt
 
-layouts/
+views/layouts/
 *pug
 *html
 *hbs
