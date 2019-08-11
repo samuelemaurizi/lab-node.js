@@ -4,3 +4,5 @@ https://academind.com/learn/web-dev/visual-studio-code-introduction/#our-visual-
 
 Default image
 https://imgplaceholder.com/200x200
+
+http://localhost:3000/admin/edit-product/123245?editing=true

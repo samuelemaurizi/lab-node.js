@@ -1,1 +1,1 @@
-[{"title":"Title","imageUrl":"","price":"199.89","description":"Testing is fun..."},{"title":"Another test","imageUrl":"","price":"250","description":"You should pay attention..."},{"title":"Order","imageUrl":"","price":"2","description":"Order matter! Model and controller must have the same order! Remember!"}]
+[{"id":"12345","title":"Order","imageUrl":"","price":"2","description":"Order matter! Model and controller must have the same order! Remember!"},{"id":"1852392645","title":"Testing","imageUrl":"","price":"12300","description":"Another test..."}]
