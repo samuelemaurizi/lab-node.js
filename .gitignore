@@ -1,4 +1,6 @@
 node_modules/
+others/
+data/
 message.txt
 
 views/layouts/

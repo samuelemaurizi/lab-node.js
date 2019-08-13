@@ -6,3 +6,13 @@ Default image
 https://imgplaceholder.com/200x200
 
 http://localhost:3000/admin/edit-product/123245?editing=true
+
+
+// Good Question
+# Megha
+how to save data coming from database in .csv file
+
+#Adam — Teaching Assistant · a month ago
+Hi Megha,
+There are modules that can handle that for you: https://www.npmjs.com/package/csv-writer
+You just need to ensure the data is structured properly.
