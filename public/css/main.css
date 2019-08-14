@@ -99,9 +99,10 @@ form {
   left: 0;
   top: 0;
   background: white;
+  border-right: 2px solid var(--nav-bg-color);
   z-index: 10;
   padding: 2rem 1rem 1rem 2rem;
-  transform: translateX(-100%);
+  transform: translateX(-101%);
   transition: transform 0.3s ease-out;
 }
 
@@ -125,14 +126,14 @@ form {
 .mobile-nav__item a {
   text-decoration: none;
   color: black;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   padding: 0.5rem 2rem;
 }
 
 .mobile-nav__item a:active,
 .mobile-nav__item a:hover,
 .mobile-nav__item a.active {
-  background: #00695c;
+  background-color: var(--nav-bg-color);
   color: white;
   border-radius: 3px;
 }
@@ -155,14 +156,6 @@ form {
   color: black;
   font-size: 1.5rem;
   padding: 0.5rem 2rem;
-}
-
-.mobile-nav__item a:active,
-.mobile-nav__item a:hover,
-.mobile-nav__item a.active {
-  background: #00695c;
-  color: white;
-  border-radius: 3px;
 }
 
 .grid {
@@ -224,6 +217,17 @@ form {
   color: var(--nav-color);
 }
 
+.btn.danger {
+  color: red;
+  border-color: red;
+}
+
+.btn.danger:hover,
+.btn.danger:active {
+  background: red;
+  color: white;
+}
+
 @media (min-width: 768px) {
   .main-header__nav {
     display: flex;
@@ -231,5 +235,32 @@ form {
 
   #side-menu-toggle {
     display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .main-header__nav {
+    display: none;
+  }
+
+  .card__actions button,
+  .card__actions a {
+    margin-bottom: 0.75rem;
+  }
+
+  .cart__item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cart__item h1,
+  .cart__item h2 {
+    padding-bottom: 1rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .mobile-nav {
+    padding: 2rem 1rem;
   }
 }
