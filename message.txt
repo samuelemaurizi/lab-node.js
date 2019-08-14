@@ -16,3 +16,5 @@ how to save data coming from database in .csv file
 Hi Megha,
 There are modules that can handle that for you: https://www.npmjs.com/package/csv-writer
 You just need to ensure the data is structured properly.
+
+check the extension Angular Essential
