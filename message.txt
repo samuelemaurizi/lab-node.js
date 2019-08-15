@@ -2,19 +2,29 @@ https://deepu.js.org/make-the-most-out-of-vscode/
 
 https://academind.com/learn/web-dev/visual-studio-code-introduction/#our-visual-studio-code-setup
 
-Default image
+### Default image
 https://imgplaceholder.com/200x200
 
 http://localhost:3000/admin/edit-product/123245?editing=true
 
-
+____________________________________
 // Good Question
-# Megha
+### Megha
 how to save data coming from database in .csv file
 
-#Adam — Teaching Assistant · a month ago
+____________________________________
+### Adam — Teaching Assistant · a month ago
 Hi Megha,
 There are modules that can handle that for you: https://www.npmjs.com/package/csv-writer
 You just need to ensure the data is structured properly.
 
 check the extension Angular Essential
+
+____________________________________
+### Adding a total price to the Cart
+let totalPrice = 0;
+  products.forEach(product => {
+      totalPrice += (product.price) * product.cartItem.quantity;
+  });
+
+const totalPrice = products.reduce((total, product) => total + (produce.price * product.cartItem.quantity), 0)

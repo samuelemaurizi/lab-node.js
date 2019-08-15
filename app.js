@@ -44,7 +44,7 @@ app.use(shopRouters);
 
 app.use(errorController.get404);
 
-// Association db
+// Association Tables db
 Product.belongsTo(User, { constraints: true, onDelete: 'CASCADE' });
 User.hasMany(Product);
 User.hasOne(Cart);
@@ -56,6 +56,7 @@ User.hasMany(Order);
 Order.belongsToMany(Product, { through: OrderItem });
 
 // Sequelize
+let localUser = undefined;
 sequelize
   // We can use this in order to reset the db :)
   // .sync({ force: true })
@@ -70,11 +71,17 @@ sequelize
     return user;
   })
   .then(user => {
-    console.log('CART CREATED!');
-    return user.createCart();
+    localUser = user;
+    return localUser.getCart();
   })
   .then(cart => {
-    // console.log(user);
+    if (!cart) {
+      console.log('...CART CREATED!');
+      return localUser.createCart();
+    }
+    return cart;
+  })
+  .then(cart => {
     app.listen(3000, console.log('Listening on PORT: 3000'));
   })
   .catch(err => {
