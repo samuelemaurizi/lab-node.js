@@ -28,3 +28,7 @@ let totalPrice = 0;
   });
 
 const totalPrice = products.reduce((total, product) => total + (produce.price * product.cartItem.quantity), 0)
+
+____________________________________
+### Tadek Plecinski on Udemy
+https://www.udemy.com/user/tadek-plecinski/?key=subscribed_courses&subscribed_courses=1
