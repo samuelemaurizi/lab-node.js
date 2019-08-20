@@ -22,6 +22,13 @@ check the extension Angular Essential
 
 ____________________________________
 ### Adding a total price to the Cart
+## Some links
+in google: how to use mongoose methods
+https://kb.objectrocket.com/mongo-db/how-to-add-instance-methods-with-mongoose-236
+https://www.codefornerds.com/schema-types-and-adding-methods-and-statics/
+https://alexanderzeitler.com/articles/mongoose-referencing-schema-in-properties-and-arrays/
+https://mongoosejs.com/docs/guide.html#methods
+
 let totalPrice = 0;
   products.forEach(product => {
       totalPrice += (product.price) * product.cartItem.quantity;
