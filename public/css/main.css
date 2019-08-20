@@ -82,14 +82,27 @@ form {
   padding: 0;
 }
 
-.main-header__item a {
+.main-header__item button {
+  font: inherit;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.main-header__item a,
+.main-header__item button {
   text-decoration: none;
   color: var(--nav-color);
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 .main-header__item a:hover,
 .main-header__item a:active,
-.main-header__item a.active {
+.main-header__item a.active,
+.main-header__item button:hover,
+.main-header__item button:active {
   color: var(--main-font-color);
 }
 
@@ -125,22 +138,36 @@ form {
   padding: 0;
 }
 
-.mobile-nav__item a {
+.mobile-nav__item button {
+  font: inherit;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.mobile-nav__item a,
+.mobile-nav__item button {
   text-decoration: none;
   color: black;
   font-size: 1.25rem;
   padding: 0.5rem 2rem;
+  padding: 0.5rem 2rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 .mobile-nav__item a:active,
 .mobile-nav__item a:hover,
-.mobile-nav__item a.active {
+.mobile-nav__item a.active,
+.mobile-nav__item button:hover,
+.mobile-nav__item button:active {
   background-color: var(--nav-bg-color);
   color: white;
   border-radius: 3px;
 }
 
-.mobile-nav__item-list {
+/* .mobile-nav__item-list {
   list-style: none;
   display: flex;
   flex-direction: column;
@@ -158,7 +185,7 @@ form {
   color: black;
   font-size: 1.5rem;
   padding: 0.5rem 2rem;
-}
+} */
 
 .grid {
   display: flex;

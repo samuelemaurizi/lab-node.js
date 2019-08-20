@@ -36,6 +36,51 @@ let totalPrice = 0;
 
 const totalPrice = products.reduce((total, product) => total + (produce.price * product.cartItem.quantity), 0)
 
+
+______________________________________________
+### Session Storage and Retrive from DB
+app.js
+
+app.use((req, res, next) => {
+  if (req.session.user) {
+    User.findById({ _id: req.session.userId })
+      .then(user => {
+        req.user = user;
+        next();
+      })
+      .catch(err => console.log(err));
+  } else {
+    next();
+  }
+});
+
+
+auth.js
+
+exports.postLogin = (req, res, next) => {
+ 
+  User.findOne({ email: req.body.email })
+    .then(user => {
+      if (req.body.password === user.password) {
+        req.session.userId = user._id;
+        req.session.isAuthenticated = true;
+        req.session.save(() => {
+          res.redirect('/');
+        });
+        return;
+      }
+      console.log('Information Incorrect...');
+      res.redirect('login');
+    })
+    .catch(err => console.log(err));
+};
+
+The only difference is just changing req.session.user = user;  to req.session.userId = user._id; at login in auth.js.
+In our middleware (app.js) User.findById({ _id: req.session.user._id }) to User.findById({ _id: req.session.userId })
+
 ____________________________________
-### Tadek Plecinski on Udemy
+###### On Udemy
+### Tadek Plecinski 
 https://www.udemy.com/user/tadek-plecinski/?key=subscribed_courses&subscribed_courses=1
+### Brianromano
+https://www.udemy.com/user/brianmromano/
