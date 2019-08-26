@@ -1,5 +1,6 @@
 node_modules/
 others/
+*log
 
 views/layouts/
 *pug
