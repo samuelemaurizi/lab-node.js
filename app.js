@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
+const csurf = require('csurf');
+const flash = require('connect-flash');
 
 // Custom Middleware
 const authRoutes = require('./routes/auth');
@@ -32,6 +34,9 @@ const store = new MongoDBStore({
   collection: 'sessions'
 });
 
+// Set CSURF
+const csurfProtection = csurf();
+
 ///// both urlencoded are good :) should give attention to extended property
 // app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -44,6 +49,9 @@ app.use(
     store: store
   })
 );
+
+app.use(csurfProtection);
+app.use(flash());
 
 app.use((req, res, next) => {
   if (!req.session.user) {
@@ -59,6 +67,12 @@ app.use((req, res, next) => {
     });
 });
 
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.session.isLoggedIn;
+  res.locals.csrfToken = req.csrfToken();
+  next();
+});
+
 app.use('/admin', adminRoutes);
 app.use(shopRouters);
 app.use(authRoutes);
@@ -69,18 +83,6 @@ app.use(errorController.get404);
 mongoose
   .connect(MONGODB_URI, { useNewUrlParser: true })
   .then(result => {
-    User.findOne().then(user => {
-      if (!user) {
-        const user = new User({
-          name: 'Johnny',
-          email: 'johnny@test.com',
-          cart: {
-            items: []
-          }
-        });
-        user.save();
-      }
-    });
     app.listen(3000, console.log('Listening on PORT: 3000'));
   })
   .catch(err => {
