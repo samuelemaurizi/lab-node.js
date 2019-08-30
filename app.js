@@ -28,7 +28,7 @@ app.get('/favicon.ico', (req, res) => res.status(204));
 const MONGODB_URI =
   'mongodb+srv://samuele:node-36@node-h36-xglvv.mongodb.net/shop?retryWrites=true&w=majority';
 
-// Store session on db
+// Store session in db
 const store = new MongoDBStore({
   uri: MONGODB_URI,
   collection: 'sessions'
