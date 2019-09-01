@@ -20,6 +20,7 @@ const app = express();
 // Setting Templating Engine
 app.set('view engine', 'ejs');
 app.set('views', 'views');
+app.set('view options', { rmWhitespace: true });
 
 // Get rid of the fiveicon req.url response middleware
 app.get('/favicon.ico', (req, res) => res.status(204));
