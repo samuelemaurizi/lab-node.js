@@ -6,6 +6,7 @@ const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const csurf = require('csurf');
 const flash = require('connect-flash');
+require('dotenv').config();
 
 // Custom Middleware
 const authRoutes = require('./routes/auth');
@@ -26,8 +27,7 @@ app.set('view options', { rmWhitespace: true });
 app.get('/favicon.ico', (req, res) => res.status(204));
 
 // DB URI
-const MONGODB_URI =
-  'mongodb+srv://samuele:node-36@node-h36-xglvv.mongodb.net/shop?retryWrites=true&w=majority';
+const MONGODB_URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@node-h36-xglvv.mongodb.net/shop?retryWrites=true&w=majority`;
 
 // Store session in db
 const store = new MongoDBStore({
@@ -60,11 +60,14 @@ app.use((req, res, next) => {
   }
   User.findById(req.session.user._id)
     .then(user => {
+      if (!user) {
+        return next();
+      }
       req.user = user;
       next();
     })
     .catch(err => {
-      console.log(err);
+      throw new Error(err);
     });
 });
 
@@ -78,7 +81,11 @@ app.use('/admin', adminRoutes);
 app.use(shopRouters);
 app.use(authRoutes);
 
+app.get('/500', errorController.get500);
 app.use(errorController.get404);
+app.use((error, req, res, next) => {
+  res.redirect('/500');
+});
 
 // Connect to MongoDb Atlas
 mongoose

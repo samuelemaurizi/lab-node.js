@@ -2,7 +2,7 @@ const Product = require('../models/product');
 const Order = require('../models/order');
 
 ////////////////////
-// GET Index
+// GET INDEX
 exports.getIndex = (req, res, next) => {
   // console.log(req.url);
   Product.find()
@@ -14,12 +14,14 @@ exports.getIndex = (req, res, next) => {
       });
     })
     .catch(err => {
-      console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 };
 
 ////////////////////
-// GET All Products
+// GET ALL PRODUCTS
 exports.getProducts = (req, res, next) => {
   // console.log(req.url);
   Product.find()
@@ -32,12 +34,14 @@ exports.getProducts = (req, res, next) => {
       });
     })
     .catch(err => {
-      console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 };
 
 ////////////////////
-// GET single product
+// GET SINGLE PRODUCT
 exports.getProduct = (req, res, next) => {
   const prodId = req.params.productId;
   Product.findById(prodId)
@@ -49,12 +53,14 @@ exports.getProduct = (req, res, next) => {
       });
     })
     .catch(err => {
-      console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 };
 
 ////////////////////
-// GET Cart
+// GET CART
 exports.getCart = (req, res, next) => {
   req.user
     .populate('cart.items.productId')
@@ -69,12 +75,14 @@ exports.getCart = (req, res, next) => {
       });
     })
     .catch(err => {
-      console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 };
 
 ////////////////////
-// POST Cart
+// POST CART
 exports.postCart = (req, res, next) => {
   const prodId = req.body.productId;
   Product.findById(prodId)
@@ -86,12 +94,14 @@ exports.postCart = (req, res, next) => {
       res.redirect('/cart');
     })
     .catch(err => {
-      console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 };
 
-////////////////////
-// POST Delete Cart Item
+/////////////////////////////////
+// POST DELETE CART PRODUCT
 exports.postCartDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId;
   req.user
@@ -100,12 +110,14 @@ exports.postCartDeleteProduct = (req, res, next) => {
       res.redirect('/cart');
     })
     .catch(err => {
-      console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 };
 
 ////////////////////
-// POST Order
+// POST ORDER
 exports.postOrder = (req, res, next) => {
   req.user
     .populate('cart.items.productId')
@@ -132,12 +144,14 @@ exports.postOrder = (req, res, next) => {
       res.redirect('/orders');
     })
     .catch(err => {
-      console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 };
 
 ////////////////////
-// GET the Orders
+// GET ORDERS
 exports.getOrders = (req, res, next) => {
   Order.find({ 'user.userId': req.user._id })
     .then(orders => {
@@ -149,6 +163,8 @@ exports.getOrders = (req, res, next) => {
       });
     })
     .catch(err => {
-      console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 };

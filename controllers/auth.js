@@ -9,6 +9,7 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const User = require('../models/user');
 
+////////////////////
 // GET LOGIN
 exports.getLogin = (req, res, next) => {
   let message = req.flash('error');
@@ -29,6 +30,7 @@ exports.getLogin = (req, res, next) => {
   });
 };
 
+////////////////////
 // GET SIGNUP
 exports.getSignup = (req, res, next) => {
   let message = req.flash('error');
@@ -50,6 +52,7 @@ exports.getSignup = (req, res, next) => {
   });
 };
 
+////////////////////
 // POST LOGIN
 exports.postLogin = (req, res, next) => {
   const { email, password } = req.body;
@@ -109,10 +112,13 @@ exports.postLogin = (req, res, next) => {
         });
     })
     .catch(err => {
-      console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 };
 
+////////////////////
 // POST SIGNUP
 exports.postSignup = (req, res, next) => {
   const { email, password, confirmPassword } = req.body;
@@ -151,10 +157,13 @@ exports.postSignup = (req, res, next) => {
       sgMail.send(msg);
     })
     .catch(err => {
-      console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 };
 
+////////////////////
 // POST LOGOUT
 exports.postLogout = (req, res, next) => {
   req.session.destroy(err => {
@@ -163,6 +172,7 @@ exports.postLogout = (req, res, next) => {
   });
 };
 
+////////////////////
 // GET RESET
 exports.getReset = (req, res, next) => {
   let message = req.flash('error');
@@ -178,6 +188,7 @@ exports.getReset = (req, res, next) => {
   });
 };
 
+////////////////////
 // POST RESET
 exports.postReset = (req, res, next) => {
   crypto.randomBytes(32, (err, buffer) => {
@@ -214,11 +225,14 @@ exports.postReset = (req, res, next) => {
         }
       })
       .catch(err => {
-        console.log(err);
+        const error = new Error(err);
+        error.httpStatusCode = 500;
+        return next(error);
       });
   });
 };
 
+////////////////////
 // GET NEW PASSWORD
 exports.getNewPassword = (req, res, next) => {
   // Get the token from url
@@ -240,10 +254,13 @@ exports.getNewPassword = (req, res, next) => {
       });
     })
     .catch(err => {
-      console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 };
 
+////////////////////
 // POST NEW PASSWORD
 exports.postNewPassword = (req, res, next) => {
   const newPassword = req.body.password;
@@ -270,6 +287,8 @@ exports.postNewPassword = (req, res, next) => {
       res.redirect('/login');
     })
     .catch(err => {
-      console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 };
