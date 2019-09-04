@@ -8,10 +8,12 @@ const adminController = require('../controllers/admin');
 
 const router = express.Router();
 
+////////////////////
 // GET
 router.get('/add-product', isAuth, adminController.getAddProduct);
 router.get('/products', isAuth, adminController.getProducts);
 
+////////////////////
 // POST
 router.post(
   '/add-product',
@@ -20,7 +22,6 @@ router.post(
       .isString()
       .isLength({ min: 3 })
       .trim(),
-    body('imageUrl').isURL(),
     body('price').isCurrency(),
     body('description')
       .isLength({ min: 5, max: 400 })
@@ -30,7 +31,8 @@ router.post(
   adminController.postAddProduct
 );
 
-// Edit
+////////////////////
+// GET EDIT
 router.get('/edit-product/:productId', isAuth, adminController.getEditProduct);
 
 router.post(
@@ -40,7 +42,6 @@ router.post(
       .isString()
       .isLength({ min: 3 })
       .trim(),
-    body('imageUrl').isURL(),
     body('price').isCurrency(),
     body('description')
       .isLength({ min: 5, max: 400 })
@@ -50,7 +51,8 @@ router.post(
   adminController.postEditProduct
 );
 
-// Delete
+////////////////////
+// POST DELETE
 router.post('/delete-product', isAuth, adminController.postDeleteProduct);
 
 module.exports = router;
