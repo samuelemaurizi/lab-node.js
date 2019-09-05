@@ -278,6 +278,29 @@ form {
   background: rgb(255, 194, 194);
 }
 
+/* ////////// */
+/* PAGINATION */
+/* ////////// */
+.pagination {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.pagination a {
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  color: #fff;
+  background-color: var(--nav-bg-color);
+  border-radius: 50%;
+}
+
+.pagination a:hover,
+.pagination a:active,
+.pagination a.active {
+  background-color: #3388af;
+}
+
 /* ///// */
 /* MEDIA */
 /* ///// */

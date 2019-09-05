@@ -29,7 +29,9 @@
         </article>
         <% } %>
       </div>
-      <% } else { %>
+      <%-include('../includes/pagination.ejs', { currentPage: currentPage,
+      hasNextPage: hasNextPage, hasPrevPage: hasPrevPage, nextPage: nextPage,
+      prevPage: prevPage, lastPage: lastPage }) %> <% } else { %>
       <h1>No Products Found! :(</h1>
       <% } %>
     </main>
