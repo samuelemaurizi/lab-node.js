@@ -1,12 +1,17 @@
+const path = require('path');
+const fs = require('fs');
+
 const mongoose = require('mongoose');
 const express = require('express');
 const bodyParser = require('body-parser');
-const path = require('path');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const csurf = require('csurf');
 const flash = require('connect-flash');
 const multer = require('multer');
+const helmet = require('helmet');
+const compression = require('compression');
+const morgan = require('morgan');
 require('dotenv').config();
 
 // Custom Middleware
@@ -28,7 +33,7 @@ app.set('view options', { rmWhitespace: true });
 app.get('/favicon.ico', (req, res) => res.status(204));
 
 // DB URI
-const MONGODB_URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@node-h36-xglvv.mongodb.net/shop?retryWrites=true&w=majority`;
+const MONGODB_URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@node-h36-xglvv.mongodb.net/${process.env.DB_DEFAULT}?retryWrites=true&w=majority`;
 
 // Store session in db
 const store = new MongoDBStore({
@@ -64,6 +69,15 @@ const fileFilter = (req, file, cb) => {
 ///// both urlencoded are good :) should give attention to extended property
 // app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
+
+const accessLogStram = fs.createWriteStream(
+  path.join(__dirname, 'access.log'),
+  { flags: 'a' }
+);
+
+app.use(helmet());
+app.use(compression());
+app.use(morgan('combined', { stream: accessLogStram }));
 app.use(
   multer({ storage: fileStorage, fileFilter: fileFilter }).single('image')
 );
@@ -114,11 +128,13 @@ app.use((error, req, res, next) => {
   res.redirect('/500');
 });
 
-// Connect to MongoDb Atlas
+// Connect to DB
+const port = process.env.PORT || 3000;
+
 mongoose
   .connect(MONGODB_URI, { useNewUrlParser: true })
   .then(result => {
-    app.listen(3000, console.log('Listening on PORT: 3000'));
+    app.listen(port, console.log(`Listening on PORT: ${port}`));
   })
   .catch(err => {
     console.log(err);

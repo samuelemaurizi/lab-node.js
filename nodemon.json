@@ -1,0 +1,8 @@
+{
+  "env": {
+    "DB_USER": "samuele",
+    "DB_PASS": "node-36",
+    "DB_DEFAULT": "shop",
+    "SENDGRID_API_KEY": "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"
+  }
+}
